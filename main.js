@@ -20,12 +20,19 @@
 let $clickMe = $('.clickMe');
 let $popover = $('.popover');
 let $wrapper = $('.wrapper');
+let count = 0 ; // 用于记录clickMe按钮被点击次数，奇数用于显示浮窗，偶数用于隐藏浮窗。
 
 $clickMe.on('click', function() {
-    $popover.show();
-    $(document).one("click", function() {
+    count = count + 1;
+    if(count % 2 === 1) {
+        $popover.show();
+        $(document).one("click", function() {
+            count = 0;
+            $($popover).hide();
+        });
+    } else {
         $($popover).hide();
-    });
+    }
 });
 
 $wrapper.on('click', function(e) {
